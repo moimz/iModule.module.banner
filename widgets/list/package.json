@@ -1,0 +1,37 @@
+{
+	"title":{
+		"ko":"배너목록"
+	},
+	"version":"3.0.0",
+	"description":{
+		"ko":"배너그룹에 포함된 배너를 표시합니다."
+	},
+	"author":{
+		"name":"Arzz",
+		"email":"arzz@arzz.com"
+	},
+	"homepage":"https://www.imodule.kr",
+	"dependencies":{
+		"core":"3.0.0",
+		"schu":"3.0.0"
+	},
+	"language":"ko",
+	"configs":{
+		"cache":{
+			"title":{
+				"ko":"캐시유지시간(초)"
+			},
+			"type":"int",
+			"default":"3600",
+			"is_required":false
+		},
+		"group":{
+			"title":{
+				"ko":"배너그룹번호"
+			},
+			"type":"int",
+			"default":0,
+			"is_required":true
+		}
+	}
+}

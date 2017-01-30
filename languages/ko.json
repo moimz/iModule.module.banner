@@ -1,0 +1,55 @@
+{
+	"text":{
+		"all_group":"전체그룹"
+	},
+	"type":{
+		"TEXT":"텍스트",
+		"IMAGE":"이미지",
+		"IMAGETEXT":"이미지 및 텍스트"
+	},
+	"target":{
+		"_blank":"새창에서 열기(_blank)",
+		"_self":"현재창에서 열기(_self)",
+		"_top":"현재창 전체에서 열기(_top)"
+	},
+	"admin":{
+		"list":{
+			"title":"배너관리",
+			"columns":{
+				"group_title":"그룹명",
+				"url":"연결대상",
+				"target":"연결방법",
+				"sort":"순서",
+				"text":"배너문구 / 이미지",
+				"permission":"노출대상",
+				"reg_date":"등록일"
+			}
+		},
+		"group":{
+			"title":"배너그룹관리",
+			"add":"그룹추가",
+			"modify":"그룹수정",
+			"columns":{
+				"title":"그룹명",
+				"type":"형태",
+				"banner":"배너수"
+			},
+			"form":{
+				"default_setting":"그룹기본설정",
+				"title":"그룹명",
+				"banner_setting":"배너설정",
+				"type":"배너형식"
+			}
+		},
+		"banner":{
+			"add":"배너추가",
+			"modify":"배너수정",
+			"form":{
+				"default_setting":"배너기본설정",
+				"group":"그룹",
+				"banner_setting":"배너설정",
+				"target":"연결방법"
+			}
+		}
+	}
+}
