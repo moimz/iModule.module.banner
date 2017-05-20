@@ -64,6 +64,11 @@ var Banner = {
 						}),
 						width:"100%",
 						columns:[{
+							text:Banner.getText("admin/group/columns/idx"),
+							width:60,
+							align:"right",
+							dataIndex:"idx"
+						},{
 							text:Banner.getText("admin/group/columns/title"),
 							minWidth:200,
 							flex:1,
@@ -169,7 +174,7 @@ var Banner = {
 										name:"type",
 										store:new Ext.data.ArrayStore({
 											fields:["display","value"],
-											data:[[Banner.getText("type/TEXT"),"TEXT"],[Banner.getText("type/IMAGE"),"IMAGE"],[Banner.getText("type/IMAGETEXT"),"IMAGETEXT"]]
+											data:[[Banner.getText("type/TEXT"),"TEXT"],[Banner.getText("type/TITLETEXT"),"TITLETEXT"],[Banner.getText("type/IMAGE"),"IMAGE"],[Banner.getText("type/IMAGETEXT"),"IMAGETEXT"]]
 										}),
 										displayField:"display",
 										valueField:"value",
@@ -295,6 +300,14 @@ var Banner = {
 										change:function(form,value) {
 											var type = form.getSelection().data.type;
 											
+											if (type.indexOf("TITLE") == -1) {
+												Ext.getCmp("ModuleBannerAddForm").getForm().findField("title").disable();
+												Ext.getCmp("ModuleBannerAddForm").getForm().findField("title").hide();
+											} else {
+												Ext.getCmp("ModuleBannerAddForm").getForm().findField("title").enable();
+												Ext.getCmp("ModuleBannerAddForm").getForm().findField("title").show();
+											}
+											
 											if (type.indexOf("TEXT") == -1) {
 												Ext.getCmp("ModuleBannerAddForm").getForm().findField("text").disable();
 												Ext.getCmp("ModuleBannerAddForm").getForm().findField("text").hide();
@@ -351,7 +364,13 @@ var Banner = {
 									value:"_self"
 								}),
 								new Ext.form.TextField({
-									fieldLabel:"배너문구",
+									fieldLabel:"배너제목",
+									name:"title",
+									hidden:true,
+									disabled:true
+								}),
+								new Ext.form.TextField({
+									fieldLabel:"배너내용",
 									name:"text",
 									hidden:true,
 									disabled:true

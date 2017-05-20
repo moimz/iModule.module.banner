@@ -24,6 +24,12 @@ if (count($errors) == 0) {
 	$group = $this->db()->select($this->table->group)->where('idx',$gidx)->getOne();
 	if ($group == null) $errors['gidx'] = $this->getErrorText('NOT_FOUND');
 	
+	if (strpos($group->type,'TITLE') !== false) {
+		$title = Request('title') ? Request('title') : $errors['title'] = $this->getErrorText('REQUIRED');
+	} else {
+		$title = null;
+	}
+	
 	if (strpos($group->type,'TEXT') !== false) {
 		$text = Request('text') ? Request('text') : $errors['text'] = $this->getErrorText('REQUIRED');
 	} else {
@@ -38,6 +44,7 @@ if (count($errors) == 0) {
 	$insert['target'] = $target;
 	$insert['reg_date'] = time();
 	
+	if ($title !== null) $insert['title'] = $title;
 	if ($text !== null) $insert['text'] = $text;
 	
 	if ($idx) $insert['idx'] = $idx;
