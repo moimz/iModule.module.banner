@@ -1,3 +1,15 @@
+<?php
+/**
+ * 이 파일은 iModule 배너모듈 일부입니다. (https://www.imodule.kr)
+ *
+ * 배너모듈 관리자패널을 구성한다.
+ * 
+ * @file /modules/banner/admin/index.php
+ * @author Arzz (arzz@arzz.com)
+ * @license MIT License
+ * @version 3.0.0.161211
+ */
+?>
 <script>
 var panel = new Ext.TabPanel({
 	id:"ModuleBanner",

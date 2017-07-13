@@ -4,7 +4,7 @@
  *
  * 배너노출과 관련된 모든 기능을 제어한다.
  * 
- * @file /modules/wysiwyg/ModuleBanner.class.php
+ * @file /modules/banner/ModuleBanner.class.php
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
  * @version 3.0.0.161211
