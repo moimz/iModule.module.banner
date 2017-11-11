@@ -271,5 +271,18 @@ class ModuleBanner {
 		
 		return $results;
 	}
+	
+	/**
+	 * 모듈관리자인지 확인한다.
+	 *
+	 * @param int $midx 회원고유번호 (없을 경우 현재 로그인한 사용자)
+	 * @return boolean $isAdmin
+	 */
+	function isAdmin($midx=null) {
+		$midx = $midx == null ? $this->IM->getModule('member')->getLogged() : $midx;
+		if ($this->IM->getModule('member')->isAdmin($midx) == true) return true;
+		
+		return $this->IM->getModule()->isInstalled('ctl') == true && $this->IM->getModule('ctl')->isAdmin();
+	}
 }
 ?>
