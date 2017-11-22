@@ -7,7 +7,8 @@
  * @file /modules/banner/ModuleBanner.class.php
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
- * @version 3.0.0.161211
+ * @version 3.0.0
+ * @modified 2017. 11. 22.
  */
 class ModuleBanner {
 	/**
@@ -92,24 +93,29 @@ class ModuleBanner {
 	 * [코어] 사이트 외부에서 현재 모듈의 API를 호출하였을 경우, API 요청을 처리하기 위한 함수로 API 실행결과를 반환한다.
 	 * 소스코드 관리를 편하게 하기 위해 각 요쳥별로 별도의 PHP 파일로 관리한다.
 	 *
+	 * @param string $protocol API 호출 프로토콜 (get, post, put, delete)
 	 * @param string $api API명
+	 * @param any $idx API 호출대상 고유값
+	 * @param object $params API 호출시 전달된 파라메터
 	 * @return object $datas API처리후 반환 데이터 (해당 데이터는 /api/index.php 를 통해 API호출자에게 전달된다.)
 	 * @see /api/index.php
 	 */
-	function getApi($api) {
+	function getApi($protocol,$api,$idx=null,$params=null) {
 		$data = new stdClass();
 		
-		/**
-		 * 이벤트를 호출한다.
-		 */
-		$this->IM->fireEvent('beforeGetApi','board',$api,$values);
+		$values = (object)get_defined_vars();
+		$this->IM->fireEvent('beforeGetApi',$this->getModule()->getName(),$api,$values);
 		
 		/**
 		 * 모듈의 api 폴더에 $api 에 해당하는 파일이 있을 경우 불러온다.
 		 */
-		if (is_file($this->getModule()->getPath().'/api/'.$api.'.php') == true) {
-			INCLUDE $this->getModule()->getPath().'/api/'.$api.'.php';
+		if (is_file($this->getModule()->getPath().'/api/'.$api.'.'.$protocol.'.php') == true) {
+			INCLUDE $this->getModule()->getPath().'/api/'.$api.'.'.$protocol.'.php';
 		}
+		
+		unset($values);
+		$values = (object)get_defined_vars();
+		$this->IM->fireEvent('afterGetApi',$this->getModule()->getName(),$api,$values,$data);
 		
 		return $data;
 	}
@@ -186,6 +192,8 @@ class ModuleBanner {
 			if ($string != null) $returnString = $string;
 		}
 		
+		$this->IM->fireEvent('afterGetText',$this->getModule()->getName(),$code,$returnString);
+		
 		/**
 		 * 언어셋 텍스트가 없는경우 iModule 코어에서 불러온다.
 		 */
@@ -259,6 +267,9 @@ class ModuleBanner {
 	function doProcess($action) {
 		$results = new stdClass();
 		
+		$values = (object)get_defined_vars();
+		$this->IM->fireEvent('beforeDoProcess',$this->getModule()->getName(),$action,$values);
+		
 		/**
 		 * 모듈의 process 폴더에 $action 에 해당하는 파일이 있을 경우 불러온다.
 		 */
@@ -266,8 +277,9 @@ class ModuleBanner {
 			INCLUDE $this->getModule()->getPath().'/process/'.$action.'.php';
 		}
 		
+		unset($values);
 		$values = (object)get_defined_vars();
-		$this->IM->fireEvent('afterDoProcess','member',$action,$values,$results);
+		$this->IM->fireEvent('afterDoProcess',$this->getModule()->getName(),$action,$values,$results);
 		
 		return $results;
 	}
