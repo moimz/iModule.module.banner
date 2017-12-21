@@ -29,70 +29,84 @@
 			"columns":{
 				"idx":{
 					"type":"int",
-					"length":11
+					"length":11,
+					"comment":"고유값"
 				},
 				"title":{
 					"type":"varchar",
-					"length":50
+					"length":50,
+					"comment":"그룹관리"
 				},
 				"type":{
 					"type":"enum",
-					"length":"'TEXT','TITLETEXT','IMAGE','IMAGETEXT'"
+					"length":"'TEXT','TITLETEXT','IMAGE','IMAGETEXT'",
+					"comment":"종류"
 				}
 			},
 			"indexes":{
 				"idx":"primary_key"
 			},
-			"auto_increment":"idx"
+			"auto_increment":"idx",
+			"comment":"배너그룹관리"
 		},
 		"banner_table":{
 			"columns":{
 				"idx":{
 					"type":"int",
-					"length":11
+					"length":11,
+					"comment":"고유값"
 				},
 				"gidx":{
 					"type":"int",
-					"length":11
+					"length":11,
+					"comment":"그룹코드"
 				},
 				"url":{
 					"type":"varchar",
-					"length":255
+					"length":255,
+					"comment":"URL LINK"
 				},
 				"target":{
 					"type":"enum",
 					"length":"'_blank','_self','_top'",
-					"default":"_blank"
+					"default":"_blank",
+					"comment":"새창여부"
 				},
 				"title":{
 					"type":"varchar",
 					"length":255,
-					"is_null":true
+					"is_null":true,
+					"comment":"배너명"
 				},
 				"text":{
 					"type":"varchar",
 					"length":255,
-					"is_null":true
+					"is_null":true,
+					"comment":"배너내용"
 				},
 				"permission":{
 					"type":"varchar",
-					"length":255
+					"length":255,
+					"comment":"사용여부"
 				},
 				"sort":{
 					"type":"int",
 					"length":11,
-					"default":0
+					"default":0,
+					"comment":"순서"
 				},
 				"reg_date":{
 					"type":"int",
-					"length":11
+					"length":11,
+					"comment":"등록일"
 				}
 			},
 			"indexes":{
 				"idx":"primary_key",
 				"gidx":"index"
 			},
-			"auto_increment":"idx"
+			"auto_increment":"idx",
+			"comment":"배너관리"
 		}
 	}
 }
