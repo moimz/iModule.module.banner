@@ -8,7 +8,7 @@
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
  * @version 3.0.0
- * @modified 2017. 11. 22.
+ * @modified 2018. 4. 7.
  */
 class ModuleBanner {
 	/**
@@ -230,18 +230,6 @@ class ModuleBanner {
 		
 		$description = null;
 		switch ($code) {
-			case 'NOT_ALLOWED_SIGNUP' :
-				if ($value != null && is_object($value) == true) {
-					$description = $value->title;
-				}
-				break;
-				
-			case 'DISABLED_LOGIN' :
-				if ($value != null && is_numeric($value) == true) {
-					$description = str_replace('{SECOND}',$value,$this->getText('text/remain_time_second'));
-				}
-				break;
-			
 			default :
 				if (is_object($value) == false && $value) $description = $value;
 		}
