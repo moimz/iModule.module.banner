@@ -1,12 +1,13 @@
 /**
- * 이 파일은 iModule 배너모듈 일부입니다. (https://www.imodule.kr)
+ * 이 파일은 iModule 배너모듈 일부입니다. (https://www.imodules.io)
  *
- * CTL 프로그램 관리자 UI구성을 처리한다.
+ * 배너모듈 관리자 UI 이벤트를 처리한다.
  * 
  * @file /modules/banner/scripts/script.js
  * @author Arzz (arzz@arzz.com)
- * @license MIT License
- * @version 3.0.0.160910
+ * @license GPLv3
+ * @version 3.0.0
+ * @modified 2018. 11. 22.
  */
 var Banner = {
 	/**

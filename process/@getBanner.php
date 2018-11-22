@@ -1,6 +1,6 @@
 <?php
 /**
- * 이 파일은 iModule 배너모듈 일부입니다. (https://www.imodule.kr)
+ * 이 파일은 iModule 배너모듈 일부입니다. (https://www.imodules.io)
  *
  * 배너 정보를 가져온다.
  * 

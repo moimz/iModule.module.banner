@@ -10,10 +10,9 @@
 		"name":"Arzz",
 		"email":"arzz@arzz.com"
 	},
-	"homepage":"https://www.imodule.kr",
+	"homepage":"https://www.imodules.io",
 	"dependencies":{
-		"core":"3.0.0",
-		"schu":"3.0.0"
+		"core":"3.0.0"
 	},
 	"language":"ko",
 	"configs":{

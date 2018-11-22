@@ -12,17 +12,13 @@
 		"name":"Arzz",
 		"email":"arzz@arzz.com"
 	},
-	"homepage":"https://www.imodule.kr",
-	"versionChecker":"http://www.moimz.com/ko/api/moimz/getLatest",
+	"homepage":"https://www.imodules.io",
+	"versionChecker":"https://api.moimz.com/download/latest",
 	"dependencies":{
-		"core":"3.0.0",
-		"attachment":"3.0.0"
+		"core":"3.0.0"
 	},
 	"language":"ko",
 	"admin":true,
-	"context":false,
-	"global":false,
-	"article":false,
 	"widget":true,
 	"databases":{
 		"banner_group_table":{
@@ -35,7 +31,7 @@
 				"title":{
 					"type":"varchar",
 					"length":50,
-					"comment":"그룹관리"
+					"comment":"배너그룹명"
 				},
 				"type":{
 					"type":"enum",
@@ -47,7 +43,7 @@
 				"idx":"primary_key"
 			},
 			"auto_increment":"idx",
-			"comment":"배너그룹관리"
+			"comment":"배너 그룹 테이블"
 		},
 		"banner_table":{
 			"columns":{
@@ -59,12 +55,12 @@
 				"gidx":{
 					"type":"int",
 					"length":11,
-					"comment":"그룹코드"
+					"comment":"그룹고유값"
 				},
 				"url":{
 					"type":"varchar",
 					"length":255,
-					"comment":"URL LINK"
+					"comment":"링크주소"
 				},
 				"target":{
 					"type":"enum",
@@ -87,13 +83,13 @@
 				"permission":{
 					"type":"varchar",
 					"length":255,
-					"comment":"사용여부"
+					"comment":"배너를 보일 권한설정"
 				},
 				"sort":{
 					"type":"int",
 					"length":11,
 					"default":0,
-					"comment":"순서"
+					"comment":"정렬"
 				},
 				"reg_date":{
 					"type":"int",
@@ -106,7 +102,7 @@
 				"gidx":"index"
 			},
 			"auto_increment":"idx",
-			"comment":"배너관리"
+			"comment":"배너 테이블"
 		}
 	}
 }

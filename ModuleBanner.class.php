@@ -1,6 +1,6 @@
 <?php
 /**
- * 이 파일은 iModule 배너모듈 일부입니다. (https://www.imodule.kr)
+ * 이 파일은 iModule 배너모듈 일부입니다. (https://www.imodules.io)
  *
  * 배너노출과 관련된 모든 기능을 제어한다.
  * 
@@ -8,7 +8,7 @@
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
  * @version 3.0.0
- * @modified 2018. 4. 7.
+ * @modified 2018. 11. 22.
  */
 class ModuleBanner {
 	/**
