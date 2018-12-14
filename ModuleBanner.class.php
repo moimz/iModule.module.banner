@@ -8,7 +8,7 @@
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
  * @version 3.0.0
- * @modified 2018. 11. 22.
+ * @modified 2018. 12. 14.
  */
 class ModuleBanner {
 	/**
@@ -203,20 +203,6 @@ class ModuleBanner {
 	}
 	
 	/**
-	 * 배너목록을 가져온다.
-	 *
-	 * @param int $gidx
-	 * @return object[] $banners
-	 */
-	function getBanners($gidx) {
-		$banners = $this->db()->select($this->table->banner)->where('gidx',$gidx)->orderBy('sort','asc')->get();
-		for ($i=0, $loop=count($banners);$i<$loop;$i++) {
-			$banners[$i]->permission = $this->IM->parsePermissionString($banners[$i]->permission);
-		}
-		return $banners;
-	}
-	
-	/**
 	 * 상황에 맞게 에러코드를 반환한다.
 	 *
 	 * @param string $code 에러코드
@@ -241,6 +227,21 @@ class ModuleBanner {
 		
 		if ($isRawData === true) return $error;
 		else return $this->IM->getErrorText($error);
+	}
+	
+	/**
+	 * 배너목록을 가져온다.
+	 *
+	 * @param int $gidx
+	 * @return object[] $banners
+	 */
+	function getBanners($gidx) {
+		$banners = $this->db()->select($this->table->banner)->where('gidx',$gidx)->orderBy('sort','asc')->get();
+		for ($i=0, $loop=count($banners);$i<$loop;$i++) {
+			$banners[$i]->permission = $this->IM->parsePermissionString($banners[$i]->permission);
+			$banners[$i]->image = $banners[$i]->image > 0 ? $this->IM->getModule('attachment')->getFileInfo($banners[$i]->image) : null;
+		}
+		return $banners;
 	}
 	
 	/**

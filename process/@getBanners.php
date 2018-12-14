@@ -8,7 +8,7 @@
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
  * @version 3.0.0
- * @modified 2018. 11. 22.
+ * @modified 2018. 12. 14.
  */
 if (defined('__IM__') == false) exit;
 
@@ -27,6 +27,7 @@ $lists = $lists->orderBy($sort,$dir)->limit($start,$limit)->get();
 for ($i=0, $loop=count($lists);$i<$loop;$i++) {
 	$lists[$i]->group_title = '['.$lists[$i]->gidx.'] '.$lists[$i]->group_title;
 	$lists[$i]->text = ($lists[$i]->title ? '['.$lists[$i]->title.']' : '').$lists[$i]->text;
+	$lists[$i]->image = $lists[$i]->image > 0 ? $this->IM->getModule('attachment')->getFileInfo($lists[$i]->image) : null;
 }
 
 $results->success = true;

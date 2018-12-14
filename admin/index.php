@@ -8,7 +8,7 @@
  * @author Arzz (arzz@arzz.com)
  * @license GPLv3
  * @version 3.0.0
- * @modified 2018. 11. 22.
+ * @modified 2018. 12. 14.
  */
 if (defined('__IM__') == false) exit;
 ?>
@@ -59,14 +59,15 @@ Ext.onReady(function () { Ext.getCmp("iModuleAdminPanel").add(
 					}),
 					"-",
 					new Ext.Button({
-						iconCls:"xi xi-coupon",
 						text:Banner.getText("admin/banner/add"),
+						iconCls:"xi xi-coupon",
 						handler:function() {
 							Banner.add();
 						}
 					}),
 					new Ext.Button({
 						text:"선택 배너삭제",
+						iconCls:"mi mi-trash",
 						handler:function() {
 							Banner.delete();
 						}
@@ -97,7 +98,6 @@ Ext.onReady(function () { Ext.getCmp("iModuleAdminPanel").add(
 						}
 					}
 				}),
-				width:"100%",
 				columns:[{
 					text:Banner.getText("admin/list/columns/group_title"),
 					width:150,
@@ -107,7 +107,13 @@ Ext.onReady(function () { Ext.getCmp("iModuleAdminPanel").add(
 					text:Banner.getText("admin/list/columns/text"),
 					width:200,
 					dataIndex:"text",
-					sortable:true
+					sortable:true,
+					renderer:function(value,p,record) {
+						if (record.data.image != null) {
+							p.style = "padding-left:80px; background:url("+record.data.image.thumbnail+") no-repeat 10px 50%; background-size:70px 22px;";
+						}
+						return value;
+					}
 				},{
 					text:Banner.getText("admin/list/columns/url"),
 					minWidth:200,

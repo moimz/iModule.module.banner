@@ -7,7 +7,7 @@
  * @author Arzz (arzz@arzz.com)
  * @license GPLv3
  * @version 3.0.0
- * @modified 2018. 11. 22.
+ * @modified 2018. 12. 14.
  */
 var Banner = {
 	/**
@@ -232,7 +232,6 @@ var Banner = {
 								waitTitle:Admin.getText("action/wait"),
 								waitMsg:Admin.getText("action/loading"),
 								success:function(form,action) {
-									
 								},
 								failure:function(form,action) {
 									if (action.result && action.result.message) {
@@ -318,11 +317,11 @@ var Banner = {
 											}
 											
 											if (type.indexOf("IMAGE") == -1) {
-//												Ext.getCmp("ModuleBannerAddForm").getForm().findField("text").disable();
-//												Ext.getCmp("ModuleBannerAddForm").getForm().findField("text").hide();
+												Ext.getCmp("ModuleBannerAddForm").getForm().findField("image").disable();
+												Ext.getCmp("ModuleBannerAddForm").getForm().findField("image").hide();
 											} else {
-//												Ext.getCmp("ModuleBannerAddForm").getForm().findField("text").enable();
-//												Ext.getCmp("ModuleBannerAddForm").getForm().findField("text").show();
+												Ext.getCmp("ModuleBannerAddForm").getForm().findField("image").enable();
+												Ext.getCmp("ModuleBannerAddForm").getForm().findField("image").show();
 											}
 										}
 									}
@@ -351,6 +350,7 @@ var Banner = {
 								new Ext.form.TextField({
 									fieldLabel:"대상 URL",
 									name:"url",
+									allowBlank:true,
 									afterBodyEl:'<div class="x-form-help">배너틀 클릭하였을 때 이동할 주소를 입력하세요.</div>'
 								}),
 								new Ext.form.ComboBox({
@@ -375,6 +375,24 @@ var Banner = {
 									name:"text",
 									hidden:true,
 									disabled:true
+								}),
+								new Ext.form.FileUploadField({
+									fieldLabel:"배너이미지",
+									name:"image",
+									buttonText:"이미지찾기",
+									allowBlank:true,
+									clearOnSubmit:false,
+									accept:"image/*",
+									emptyText:"이미지파일(JPG, GIF, PNG)만 등록가능합니다.",
+									style:{marginBottom:0},
+									hidden:true,
+									disabled:true
+								}),
+								new Ext.form.Checkbox({
+									boxLabel:"첨부된 배너이미지 삭제하기",
+									name:"image_delete",
+									hidden:true,
+									style:{marginBottom:0,paddingLeft:"105px"}
 								})
 							]
 						})
@@ -426,7 +444,10 @@ var Banner = {
 							waitTitle:Admin.getText("action/wait"),
 							waitMsg:Admin.getText("action/loading"),
 							success:function(form,action) {
-								
+								if (action.result.data.image != null) {
+									Ext.getCmp("ModuleBannerAddForm").getForm().findField("image_delete").setBoxLabel(action.result.data.image.name+ "("+iModule.getFileSize(action.result.data.image.size)+") 삭제");
+									Ext.getCmp("ModuleBannerAddForm").getForm().findField("image_delete").show();
+								}
 							},
 							failure:function(form,action) {
 								if (action.result && action.result.message) {

@@ -80,6 +80,12 @@
 					"is_null":true,
 					"comment":"배너내용"
 				},
+				"image":{
+					"type":"int",
+					"length":11,
+					"default":0,
+					"comment":"배너이미지"
+				},
 				"permission":{
 					"type":"varchar",
 					"length":255,

@@ -18,7 +18,7 @@ $idx = Request('idx');
 $gidx = Request('gidx') ? Request('gidx') : $errors['gidx'] = $this->getErrorText('REQUIRED');
 $sort = is_numeric(Request('sort')) == true ? Request('sort') : $errors['sort'] = $this->getErrorText('REQUIRED');
 $permission = Request('permission');
-$url = Request('url') ? Request('url') : $errors['gidx'] = $this->getErrorText('REQUIRED');
+$url = Request('url') ? Request('url') : '#';
 $target = Request('target') ? Request('target') : '_blank';
 
 if (count($errors) == 0) {
@@ -37,6 +37,31 @@ if (count($errors) == 0) {
 		$text = null;
 	}
 	
+	if ($idx) {
+		$data = $this->db()->select($this->table->banner)->where('idx',$idx)->getOne();
+		$imageIdx = $data->image;
+	} else {
+		$imageIdx = 0;
+	}
+	
+	if (strpos($group->type,'IMAGE') !== false) {
+		if (isset($_FILES['image']) == true && $_FILES['image']['tmp_name']) {
+			if ($imageIdx == 0) {
+				$imageIdx = $this->IM->getModule('attachment')->fileSave($_FILES['image']['name'],$_FILES['image']['tmp_name'],'banner','item','PUBLISHED',true);
+			} else {
+				$imageIdx = $this->IM->getModule('attachment')->fileReplace($imageIdx,$_FILES['image']['name'],$_FILES['image']['tmp_name'],true);
+			}
+		}
+		
+		if (Request('image_delete')) {
+			if ($imageIdx > 0) $this->IM->getModule('attachment')->fileDelete($imageIdx);
+			$imageIdx = 0;
+		}
+	} else {
+		if ($imageIdx > 0) $this->IM->getModule('attachment')->fileDelete($imageIdx);
+		$imageIdx = 0;
+	}
+	
 	$insert = array();
 	$insert['gidx'] = $gidx;
 	$insert['sort'] = $sort;
@@ -47,6 +72,7 @@ if (count($errors) == 0) {
 	
 	if ($title !== null) $insert['title'] = $title;
 	if ($text !== null) $insert['text'] = $text;
+	$insert['image'] = $imageIdx;
 	
 	if ($idx) $insert['idx'] = $idx;
 	
