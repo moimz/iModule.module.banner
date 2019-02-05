@@ -1,12 +1,6 @@
 {
 	"text":{
-		"all_group":"전체그룹"
-	},
-	"type":{
-		"TEXT":"텍스트",
-		"TITLETEXT":"제목 및 텍스트",
-		"IMAGE":"이미지",
-		"IMAGETEXT":"이미지 및 텍스트"
+		"all":"전체배너"
 	},
 	"target":{
 		"_blank":"새창에서 열기(_blank)",
@@ -14,43 +8,52 @@
 		"_top":"현재창 전체에서 열기(_top)"
 	},
 	"admin":{
-		"list":{
+		"manager":{
 			"title":"배너관리",
+			"add":"배너추가",
+			"modify":"배너수정",
+			"delete":"배너삭제",
 			"columns":{
-				"group_title":"그룹명",
+				"bid":"배너아이디",
+				"title":"그룹명",
+				"item":"항목수"
+			},
+			"form":{
+				"bid":"배너아이디",
+				"title":"그룹명"
+			}
+		},
+		"item":{
+			"title":"배너항목관리",
+			"add":"배너항목추가",
+			"modify":"배너항목수정",
+			"delete":"배너항목삭제",
+			"columns":{
+				"bid":"배너아이디",
+				"title":"배너이미지 / 제목",
+				"text":"배너텍스트",
 				"url":"연결대상",
 				"target":"연결방법",
 				"sort":"순서",
-				"text":"배너문구 / 이미지",
 				"permission":"노출대상",
 				"reg_date":"등록일"
-			}
-		},
-		"group":{
-			"title":"배너그룹관리",
-			"add":"그룹추가",
-			"modify":"그룹수정",
-			"columns":{
-				"idx":"번호",
-				"title":"그룹명",
-				"type":"형태",
-				"banner":"배너수"
 			},
 			"form":{
-				"default_setting":"그룹기본설정",
-				"title":"그룹명",
-				"banner_setting":"배너설정",
-				"type":"배너형식"
-			}
-		},
-		"banner":{
-			"add":"배너추가",
-			"modify":"배너수정",
-			"form":{
-				"default_setting":"배너기본설정",
-				"group":"그룹",
-				"banner_setting":"배너설정",
-				"target":"연결방법"
+				"bid":"배너아이디",
+				"title":"배너제목",
+				"title_color":"제목글자색",
+				"text":"배너텍스트",
+				"text_color":"텍스트글자색",
+				"default_color":"기본색상사용",
+				"image":"배너이미지",
+				"image_help":"이미지파일(JPG, GIF, PNG)만 등록가능합니다.",
+				"image_delete":"첨부된 배너이미지 삭제하기",
+				"url":"대상 URL",
+				"url_help":"배너틀 클릭하였을 때 이동할 주소를 입력하세요.",
+				"target":"링크방식",
+				"sort":"노출순서",
+				"sort_help":"노출순서가 낮을수록 먼저 노출됩니다.",
+				"permission":"노출권한"
 			}
 		}
 	}

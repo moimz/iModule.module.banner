@@ -8,7 +8,7 @@
  * @author Arzz (arzz@arzz.com)
  * @license GPLv3
  * @version 3.0.0
- * @modified 2018. 12. 14.
+ * @modified 2019. 2. 5.
  */
 if (defined('__IM__') == false) exit;
 ?>
@@ -21,55 +21,55 @@ Ext.onReady(function () { Ext.getCmp("iModuleAdminPanel").add(
 		activeTab:0,
 		items:[
 			new Ext.grid.Panel({
-				id:"ModuleBannerList",
-				title:Banner.getText("admin/list/title"),
+				id:"ModuleBannerItemList",
+				title:Banner.getText("admin/item/title"),
 				border:false,
 				tbar:[
 					new Ext.form.ComboBox({
-						id:"ModuleBannerGroupSelect",
+						id:"ModuleBannerSelect",
 						store:new Ext.data.JsonStore({
 							proxy:{
 								type:"ajax",
-								url:ENV.getProcessUrl("banner","@getGroups"),
+								url:ENV.getProcessUrl("banner","@getBanners"),
 								extraParams:{is_all:"true"},
 								reader:{type:"json"}
 							},
 							autoLoad:true,
 							remoteSort:false,
 							sorters:[{property:"sort",direction:"ASC"}],
-							fields:["idx","title",{name:"sort",type:"int"}]
+							fields:["bid","title",{name:"sort",type:"int"}]
 						}),
 						width:140,
 						editable:false,
 						displayField:"title",
-						valueField:"idx",
-						value:"0",
+						valueField:"bid",
+						value:"",
 						listeners:{
 							change:function(form,value) {
-								Ext.getCmp("ModuleBannerList").getStore().getProxy().setExtraParam("gidx",value);
-								Ext.getCmp("ModuleBannerList").getStore().reload();
+								Ext.getCmp("ModuleBannerItemList").getStore().getProxy().setExtraParam("bid",value);
+								Ext.getCmp("ModuleBannerItemList").getStore().reload();
 							}
 						}
 					}),
 					new Ext.Button({
 						iconCls:"fa fa-cog",
 						handler:function() {
-							Banner.group.manager();
+							Banner.manager.window();
 						}
 					}),
 					"-",
 					new Ext.Button({
-						text:Banner.getText("admin/banner/add"),
+						text:Banner.getText("admin/item/add"),
 						iconCls:"xi xi-coupon",
 						handler:function() {
-							Banner.add();
+							Banner.item.add();
 						}
 					}),
 					new Ext.Button({
 						text:"선택 배너삭제",
 						iconCls:"mi mi-trash",
 						handler:function() {
-							Banner.delete();
+							Banner.item.delete();
 						}
 					})
 				],
@@ -77,7 +77,7 @@ Ext.onReady(function () { Ext.getCmp("iModuleAdminPanel").add(
 					proxy:{
 						type:"ajax",
 						simpleSortMode:true,
-						url:ENV.getProcessUrl("banner","@getBanners"),
+						url:ENV.getProcessUrl("banner","@getItems"),
 						extraParams:{gidx:"0"},
 						reader:{type:"json"}
 					},
@@ -99,29 +99,34 @@ Ext.onReady(function () { Ext.getCmp("iModuleAdminPanel").add(
 					}
 				}),
 				columns:[{
-					text:Banner.getText("admin/list/columns/group_title"),
+					text:Banner.getText("admin/item/columns/bid"),
 					width:150,
-					dataIndex:"group_title",
+					dataIndex:"banner_title",
 					sortable:true
 				},{
-					text:Banner.getText("admin/list/columns/text"),
+					text:Banner.getText("admin/item/columns/title"),
 					width:200,
 					dataIndex:"text",
 					sortable:true,
 					renderer:function(value,p,record) {
 						if (record.data.image != null) {
-							p.style = "padding-left:80px; background:url("+record.data.image.thumbnail+") no-repeat 10px 50%; background-size:70px 22px;";
+							p.style = "padding-left:90px; background:url("+record.data.image.thumbnail+") no-repeat 10px 50%; background-size:70px 20px;";
 						}
 						return value;
 					}
 				},{
-					text:Banner.getText("admin/list/columns/url"),
+					text:Banner.getText("admin/item/columns/text"),
 					minWidth:200,
-					dataIndex:"url",
 					flex:1,
+					dataIndex:"text",
 					sortable:true
 				},{
-					text:Banner.getText("admin/list/columns/target"),
+					text:Banner.getText("admin/item/columns/url"),
+					width:200,
+					dataIndex:"url",
+					sortable:true
+				},{
+					text:Banner.getText("admin/item/columns/target"),
 					width:160,
 					dataIndex:"target",
 					align:"center",
@@ -129,19 +134,19 @@ Ext.onReady(function () { Ext.getCmp("iModuleAdminPanel").add(
 						return Banner.getText("target/"+value);
 					}
 				},{
-					text:Banner.getText("admin/list/columns/sort"),
+					text:Banner.getText("admin/item/columns/sort"),
 					width:80,
 					dataIndex:"sort",
 					hideable:false,
 					sortable:true,
 					align:"right"
 				},{
-					text:Banner.getText("admin/list/columns/permission"),
+					text:Banner.getText("admin/item/columns/permission"),
 					width:200,
 					hideable:false,
 					dataIndex:"permission"
 				},{
-					text:Banner.getText("admin/list/columns/reg_date"),
+					text:Banner.getText("admin/item/columns/reg_date"),
 					width:160,
 					hideable:false,
 					dataIndex:"reg_date",
@@ -159,13 +164,13 @@ Ext.onReady(function () { Ext.getCmp("iModuleAdminPanel").add(
 					],
 					listeners:{
 						beforerender:function(tool) {
-							tool.bindStore(Ext.getCmp("ModuleBannerList").getStore());
+							tool.bindStore(Ext.getCmp("ModuleBannerItemList").getStore());
 						}
 					}
 				}),
 				listeners:{
 					itemdblclick:function(grid,record) {
-						Banner.add(record.data.idx);
+						Banner.item.add(record.data.idx);
 					},
 					itemcontextmenu:function(grid,record,item,index,e) {
 						var menu = new Ext.menu.Menu();
@@ -186,7 +191,7 @@ Ext.onReady(function () { Ext.getCmp("iModuleAdminPanel").add(
 							iconCls:"xi xi-form",
 							text:"배너수정",
 							handler:function() {
-								Banner.add(record.data.idx);
+								Banner.item.add(record.data.idx);
 							}
 						});
 						
@@ -194,7 +199,7 @@ Ext.onReady(function () { Ext.getCmp("iModuleAdminPanel").add(
 							iconCls:"xi xi-form",
 							text:"배너삭제",
 							handler:function() {
-								Banner.delete();
+								Banner.item.delete();
 							}
 						});
 						

@@ -56,7 +56,7 @@ class ModuleBanner {
 		 */
 		$this->table = new stdClass();
 		$this->table->banner = 'banner_table';
-		$this->table->group = 'banner_group_table';
+		$this->table->item = 'banner_item_table';
 	}
 	
 	/**
@@ -235,13 +235,13 @@ class ModuleBanner {
 	 * @param int $gidx
 	 * @return object[] $banners
 	 */
-	function getBanners($gidx) {
-		$banners = $this->db()->select($this->table->banner)->where('gidx',$gidx)->orderBy('sort','asc')->get();
-		for ($i=0, $loop=count($banners);$i<$loop;$i++) {
-			$banners[$i]->permission = $this->IM->parsePermissionString($banners[$i]->permission);
-			$banners[$i]->image = $banners[$i]->image > 0 ? $this->IM->getModule('attachment')->getFileInfo($banners[$i]->image) : null;
+	function getItems($bid) {
+		$items = $this->db()->select($this->table->item)->where('bid',$bid)->orderBy('sort','asc')->get();
+		for ($i=0, $loop=count($items);$i<$loop;$i++) {
+			$items[$i]->permission = $this->IM->parsePermissionString($items[$i]->permission);
+			$items[$i]->image = $items[$i]->image > 0 ? $this->IM->getModule('attachment')->getFileInfo($items[$i]->image) : null;
 		}
-		return $banners;
+		return $items;
 	}
 	
 	/**

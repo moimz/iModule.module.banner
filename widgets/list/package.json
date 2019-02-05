@@ -16,21 +16,21 @@
 	},
 	"language":"ko",
 	"configs":{
+		"bid":{
+			"title":{
+				"ko":"배너아이디"
+			},
+			"type":"int",
+			"default":0,
+			"is_required":true
+		},
 		"cache":{
 			"title":{
 				"ko":"캐시유지시간(초)"
 			},
 			"type":"int",
-			"default":"3600",
+			"default":300,
 			"is_required":false
-		},
-		"group":{
-			"title":{
-				"ko":"배너그룹번호"
-			},
-			"type":"int",
-			"default":0,
-			"is_required":true
 		}
 	}
 }
