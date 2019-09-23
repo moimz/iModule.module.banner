@@ -4,7 +4,7 @@
 	"title":{
 		"ko":"배너"
 	},
-	"version":"3.1.0",
+	"version":"3.2.0",
 	"description":{
 		"ko":"배너노출과 관련된 전반적인 기능을 관리합니다."
 	},
@@ -21,6 +21,19 @@
 	"admin":true,
 	"widget":true,
 	"databases":{
+		"banner_admin_table":{
+			"columns":{
+				"midx":{
+					"type":"int",
+					"length":11,
+					"comment":"회원고유번호"
+				}
+			},
+			"indexes":{
+				"midx":"primary_key"
+			},
+			"comment":"banner 관리자 테이블"
+		},
 		"banner_table":{
 			"columns":{
 				"bid":{

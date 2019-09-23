@@ -7,8 +7,8 @@
  * @file /modules/banner/ModuleBanner.class.php
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
- * @version 3.1.0
- * @modified 2018. 12. 14.
+ * @version 3.2.0
+ * @modified 2019. 9. 23.
  */
 class ModuleBanner {
 	/**
@@ -55,6 +55,7 @@ class ModuleBanner {
 		 * @see 모듈폴더의 package.json 의 databases 참고
 		 */
 		$this->table = new stdClass();
+		$this->table->admin = 'banner_admin_table';
 		$this->table->banner = 'banner_table';
 		$this->table->item = 'banner_item_table';
 	}
@@ -131,6 +132,11 @@ class ModuleBanner {
 		 */
 		$IM = $this->IM;
 		$Module = $this;
+
+		/**
+		 * 회원모듈 관리자를 불러온다.
+		 */
+		$this->IM->getModule('admin')->loadModule('member');
 		
 		ob_start();
 		INCLUDE $this->getModule()->getPath().'/admin/index.php';
@@ -283,7 +289,7 @@ class ModuleBanner {
 		$midx = $midx == null ? $this->IM->getModule('member')->getLogged() : $midx;
 		if ($this->IM->getModule('member')->isAdmin($midx) == true) return true;
 		
-		return $this->IM->getModule()->isInstalled('ctl') == true && $this->IM->getModule('ctl')->isAdmin();
+		return $this->db()->select($this->table->admin)->where('midx',$midx)->has();
 	}
 }
 ?>
