@@ -7,7 +7,7 @@
  * @file /modules/banner/process/@saveBanner.php
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
- * @version 3.1.0
+ * @version 3.2.0
  * @modified 2019. 2. 5.
  */
 if (defined('__IM__') == false) exit;
