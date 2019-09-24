@@ -32,7 +32,7 @@
 			"indexes":{
 				"midx":"primary_key"
 			},
-			"comment":"banner 관리자 테이블"
+			"comment":"배너 관리자 테이블"
 		},
 		"banner_table":{
 			"columns":{
