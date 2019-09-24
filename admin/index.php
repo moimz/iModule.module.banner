@@ -8,7 +8,7 @@
  * @author Arzz (arzz@arzz.com)
  * @license GPLv3
  * @version 3.2.0
- * @modified 2019. 2. 6.
+ * @modified 2019. 9. 24.
  */
 if (defined('__IM__') == false) exit;
 ?>
@@ -175,7 +175,7 @@ Ext.onReady(function () { Ext.getCmp("iModuleAdminPanel").add(
 					itemcontextmenu:function(grid,record,item,index,e) {
 						var menu = new Ext.menu.Menu();
 						
-						menu.add('<div class="x-menu-title">'+record.data.text+'</div>');
+						menu.addTitle(record.data.text);
 						
 						menu.add({
 							iconCls:"xi xi-form",
